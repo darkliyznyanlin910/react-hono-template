@@ -7,6 +7,5 @@ interface ImportMetaEnv {
 interface Window {
   __env?: {
     VITE_APP_URL?: string;
-    NODE_ENV?: string;
   };
 }

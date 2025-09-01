@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-
-import { env } from "~/env";
+import { env } from "#client/env";
 
 export const Route = createFileRoute("/")({
   component: Index,

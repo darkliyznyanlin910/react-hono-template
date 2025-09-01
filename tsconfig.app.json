@@ -23,7 +23,7 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
+      "#client/*": ["./src/*"]
     }
   },
   "include": ["src", "tests"]

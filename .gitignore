@@ -27,3 +27,6 @@ dist-ssr
 
 # Coverage
 coverage.json
+
+# Environment variables
+.env

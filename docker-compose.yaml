@@ -1,0 +1,21 @@
+name: react-hono-template
+
+services:
+  maildev:
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+    environment:
+      - MAILDEV_OUTGOING_USER=username
+      - MAILDEV_OUTGOING_PASS=password
+      - MAILDEV_INCOMING_USER=username
+      - MAILDEV_INCOMING_PASS=password
+  postgres:
+    image: postgres:17-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=app
