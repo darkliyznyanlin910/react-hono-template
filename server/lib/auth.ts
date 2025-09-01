@@ -12,7 +12,7 @@ export const auth = betterAuth({
   telemetry: {
     enabled: false,
   },
-  baseURL: env.VITE_APP_URL,
+  baseURL: env.VITE_APP_URL + "/api/auth",
   secret: env.BETTER_AUTH_SECRET,
   emailAndPassword: {
     enabled: true,
