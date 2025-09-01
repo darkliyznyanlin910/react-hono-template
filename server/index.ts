@@ -3,7 +3,7 @@ import { serveStatic } from "@hono/node-server/serve-static";
 import { env } from "#server/env";
 import { Hono } from "hono";
 
-import { auth } from "./auth";
+import { auth } from "./lib/auth";
 
 const app = new Hono()
   .get("/health", (c) => {
