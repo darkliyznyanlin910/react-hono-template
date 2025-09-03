@@ -2,9 +2,9 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { openAPI } from "better-auth/plugins";
 
-import { db } from "../drizzle/db";
-import { env } from "../env";
-import { mailer } from "./mailer";
+import { db } from "#server/drizzle/db.ts";
+import { env } from "#server/env.ts";
+import { mailer } from "#server/lib/mailer.ts";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {

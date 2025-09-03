@@ -1,23 +1,53 @@
-# Stage 1: Build
-FROM node:22-alpine AS builder
-RUN apk add --no-cache python3 make g++ gcc
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN npm install -g pnpm
+# use the official Bun image
+# see all versions at https://hub.docker.com/r/oven/bun/tags
+FROM oven/bun:1.2.9-alpine AS base
+WORKDIR /app
 
-WORKDIR /repo
+# install dependencies into temp directory
+# this will cache them and speed up future builds
+FROM base AS install
 
-COPY . .
-RUN pnpm install
+# Install Alpine packages needed for native dependencies
+RUN apk add --no-cache \
+  python3 \
+  make \
+  g++ \
+  libwebp-dev \
+  libjpeg-turbo-dev \
+  libpng-dev \
+  tiff-dev \
+  giflib-dev \
+  libde265-dev \
+  libheif-dev \
+  expat-dev \
+  glib-dev
 
-# Build the project
-RUN pnpm build
+RUN mkdir -p /temp/dev
+COPY package.json /temp/dev/
+RUN cd /temp/dev && bun install
 
-# Stage 2: Run
-FROM node:22-alpine AS runner
-WORKDIR /repo
+# install with --production (exclude devDependencies)
+RUN mkdir -p /temp/prod
+COPY package.json /temp/prod/
+RUN cd /temp/prod && bun install --production
 
-COPY --from=builder /repo/dist /repo/dist
+# copy node_modules from temp directory
+# then copy all (non-ignored) project files into the image
+FROM base AS build
+COPY --from=install /temp/dev/node_modules node_modules
+COPY . /app
+ENV NODE_ENV=production
+RUN bun run build
 
-EXPOSE 4000
-CMD ["node", "./dist/index.cjs"]
+# copy production dependencies and source code into final image
+FROM base AS release
+COPY --from=install --chown=bun:bun /temp/prod/node_modules /app/node_modules
+COPY --from=build --chown=bun:bun /app/dist /app/dist
+COPY --chown=bun:bun package.json /app/
+
+# run the app
+USER bun
+EXPOSE 4001/tcp
+ENV NODE_ENV=production
+ENTRYPOINT [ "bun", "run", "dist/index.js" ]
+# CMD ["sleep", "infinity"]

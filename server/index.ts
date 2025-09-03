@@ -1,9 +1,9 @@
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
-import { env } from "#server/env";
 import { Hono } from "hono";
 
-import { auth } from "./lib/auth";
+import { env } from "#server/env.ts";
+import { auth } from "#server/lib/auth.ts";
 
 const app = new Hono()
   .get("/health", (c) => {
