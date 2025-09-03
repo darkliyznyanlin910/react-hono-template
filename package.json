@@ -6,27 +6,31 @@
   "exports": {
     ".": "./src/index.ts"
   },
+  "packageManager": "bun@1.2.15",
   "engines": {
     "node": ">=22.14.0",
-    "pnpm": ">=10.11.0"
+    "bun": ">=1.2.15"
   },
-  "packageManager": "pnpm@10.11.1",
+  "imports": {
+    "#server/*": "./server/*",
+    "#client/*": "./src/*"
+  },
   "scripts": {
-    "start": "NODE_ENV=production pnpm with-env node dist/index.cjs",
-    "build": "pnpm with-env vite build && esbuild server/index.ts --bundle --platform=node --outfile=dist/index.cjs",
-    "preview": "pnpm with-env vite preview",
+    "start": "NODE_ENV=production bun with-env node dist/index.cjs",
+    "build": "bun with-env vite build && esbuild server/index.ts --bundle --platform=node --outfile=dist/index.cjs",
+    "preview": "bun with-env vite preview",
     "clean": "git clean -xdf .cache .turbo dist node_modules .tanstack",
-    "dev:server": "pnpm with-env tsx watch server/index.ts",
-    "dev:vite": "wait-on http://localhost:4001/health && pnpm with-env vite",
-    "dev": "concurrently \"pnpm dev:server\" \"pnpm dev:vite\"",
+    "dev:server": "bun with-env tsx watch server/index.ts",
+    "dev:vite": "wait-on http://localhost:4001/health && bun with-env vite",
+    "dev": "concurrently \"bun dev:server\" \"bun dev:vite\"",
     "format": "prettier --check . --ignore-path .gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "with-env": "dotenv -e .env --",
     "test": "vitest run",
-    "auth:generate": "pnpm dlx @better-auth/cli generate --output server/drizzle/schema/auth.ts --config server/lib/auth.ts",
-    "db:push": "pnpm with-env drizzle-kit push",
-    "db:studio": "pnpm with-env drizzle-kit studio"
+    "auth:generate": "bun dlx @better-auth/cli generate --output server/drizzle/schema/auth.ts --config server/lib/auth.ts",
+    "db:push": "bun with-env drizzle-kit push",
+    "db:studio": "bun with-env drizzle-kit studio"
   },
   "dependencies": {
     "@eslint/js": "^9.33.0",
@@ -43,6 +47,7 @@
     "next-themes": "^0.4.6",
     "nodemailer": "^7.0.6",
     "pg": "^8.16.3",
+    "postgres": "^3.4.7",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "react": "19.1.0",
     "react-dom": "19.1.0",
