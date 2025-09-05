@@ -30,3 +30,6 @@ coverage.json
 
 # Environment variables
 .env
+
+# Data
+data/

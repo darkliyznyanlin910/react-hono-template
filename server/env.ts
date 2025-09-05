@@ -8,13 +8,25 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.enum(["development", "production"]).default("development"),
     DATABASE_URL: z.url(),
+
+    // Better Auth
     BETTER_AUTH_SECRET: z.string(),
+
+    // Mail
     SMTP_HOST: z.string(),
     SMTP_PORT: z.coerce.number(),
     SMTP_SECURE: z.coerce.boolean(),
     SMTP_USER: z.string(),
     SMTP_PASS: z.string(),
     SMTP_FROM: z.string(),
+
+    // Minio
+    AWS_ACCESS_KEY_ID: z.string(),
+    AWS_SECRET_ACCESS_KEY: z.string(),
+    AWS_REGION: z.string(),
+    AWS_S3_ENDPOINT: z.string(),
+    AWS_S3_BUCKET: z.string(),
+    FORCE_PATH_STYLE: z.coerce.boolean(),
   },
   clientPrefix: "VITE_",
   runtimeEnv: {
