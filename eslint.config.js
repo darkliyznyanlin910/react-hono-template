@@ -1,6 +1,6 @@
 import * as path from "node:path";
-import { includeIgnoreFile } from "@eslint/compat";
-import eslint from "@eslint/js";
+import { includeIgnoreFile } from "#clienteslint/compat";
+import eslint from "#clienteslint/js";
 import importPlugin from "eslint-plugin-import";
 import reactHooks from "eslint-plugin-react-hooks";
 import turboPlugin from "eslint-plugin-turbo";
