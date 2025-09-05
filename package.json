@@ -16,7 +16,7 @@
     "#client/*": "./src/*"
   },
   "scripts": {
-    "start": "NODE_ENV=production bun with-env node dist/index.cjs",
+    "start": "NODE_ENV=production bun with-env bun dist/index.js",
     "build": "bun with-env vite build && bun build --minify --sourcemap --target=bun --outdir=dist server/index.ts",
     "build:docker": "docker build -t react-hono-template .",
     "preview": "bun with-env vite preview",

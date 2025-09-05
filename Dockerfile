@@ -1,6 +1,6 @@
 # use the official Bun image
 # see all versions at https://hub.docker.com/r/oven/bun/tags
-FROM oven/bun:1.2.9-alpine AS base
+FROM oven/bun:1.2.15-alpine AS base
 WORKDIR /app
 
 # install dependencies into temp directory
@@ -49,5 +49,5 @@ COPY --chown=bun:bun package.json /app/
 USER bun
 EXPOSE 4001/tcp
 ENV NODE_ENV=production
-ENTRYPOINT [ "bun", "run", "dist/index.js" ]
+ENTRYPOINT [ "bun", "dist/index.js" ]
 # CMD ["sleep", "infinity"]

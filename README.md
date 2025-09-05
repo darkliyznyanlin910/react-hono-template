@@ -6,17 +6,16 @@ A modern full-stack TypeScript template combining React frontend with Hono backe
 
 ### Prerequisites
 
-- Node.js >=22.14.0
-- pnpm >=10.11.0
+- Bun >=1.2.15
 
 ### Development
 
 ```bash
 # Install dependencies
-pnpm install
+bun install
 
 # Start development server (both frontend and backend)
-pnpm dev
+bun dev
 ```
 
 This will start:
@@ -28,20 +27,20 @@ This will start:
 
 ```bash
 # Start only the backend server
-pnpm dev:server
+bun dev:server
 
 # Start only the frontend (requires backend to be running)
-pnpm dev:vite
+bun dev:vite
 ```
 
 ### Production
 
 ```bash
 # Build the application
-pnpm build
+bun build
 
 # Start production server
-pnpm start
+bun start
 ```
 
 ## Tech Stack
@@ -136,20 +135,20 @@ react-hono-template/
 │   └── globals.css        # Global styles
 ├── dist/                  # Production build output
 │   ├── static/            # Frontend static assets
-│   └── index.cjs          # Bundled server
+│   └── index.js           # Bundled server
 └── tests/                 # Test files
 ```
 
 ## Scripts
 
-- `pnpm dev` - Start development environment
-- `pnpm build` - Build for production
-- `pnpm start` - Start production server
-- `pnpm test` - Run tests
-- `pnpm lint` - Lint code
-- `pnpm format` - Check code formatting
-- `pnpm typecheck` - Run TypeScript type checking
-- `pnpm clean` - Clean build artifacts and dependencies
+- `bun dev` - Start development environment
+- `bun build` - Build for production
+- `bun start` - Start production server
+- `bun test` - Run tests
+- `bun lint` - Lint code
+- `bun format` - Check code formatting
+- `bun typecheck` - Run TypeScript type checking
+- `bun clean` - Clean build artifacts and dependencies
 
 ## Environment Variables
 
